@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Risolutore di Sudoku — Client</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+<div class="card">
+    <header>
+        <div>
+            <h1>Risolutore di Sudoku</h1>
+            <p class="lead">Risolvi in maniera <b>facile e veloce</b> i tuoi sudoku! Inserisci i numeri (1–9). Le celle vuote valgono come 0.</p>
+        </div>
+        <button id="themeToggle" title="Cambia tema">🌙</button>
+    </header>
+
+    <div class="layout">
+        <!-- left panel -->
+        <div class="panel">
+            <div class="grid-wrapper">
+                <div class="grid" id="sudokuGrid"></div>
+            </div>
+
+            <div class="controls">
+                <button id="btnSolve" class="primary">Risolvi</button>
+                <button id="btnClear">Pulisci</button>
+                <button id="btnSample">Carica esempio</button>
+            </div>
+        </div>
+
+        <!-- right panel-->
+        <div class="panel right">
+            <h4 style="margin:0;font-size:14px;">Anteprima board</h4>
+            <div id="preview" class="board-preview"></div>
+            <div class="result" id="resultArea">Pronto</div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

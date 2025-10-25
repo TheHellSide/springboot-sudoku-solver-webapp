@@ -8,11 +8,28 @@ import java.util.Optional;
 public class SudokuSolverService {
     private static final int GRID_SIZE = 9;
     public static Optional<int[][]> getSolvedBoard(int[][] board) {
-        if (!solveBoard(board)) {
+        if (!solveBoard(board) || !isBoardValid(board)) {
             return Optional.empty();
         }
 
         return Optional.of(board);
+    }
+
+    private static boolean isBoardValid(int[][] board) {
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                int number = board[row][col];
+                if (number != 0) {
+                    board[row][col] = 0; // temporaneamente rimuovo il numero
+                    if (!isValidPlacement(board, number, row, col)) {
+                        board[row][col] = number; // ripristino
+                        return false; // duplicato trovato
+                    }
+                    board[row][col] = number; // ripristino
+                }
+            }
+        }
+        return true;
     }
 
     private static boolean isNumberInColumn(int[][] grid, int number, int column) {
