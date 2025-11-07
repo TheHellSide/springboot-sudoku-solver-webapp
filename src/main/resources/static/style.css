@@ -257,6 +257,23 @@ button.primary {
     border-radius: 6px;
 }
 
+.bp-dark {
+    background-color: #0f1728; /* grigio scuro (puoi adattarlo per dark mode) */
+}
+
+.bp-light {
+    background-color: #161e2f; /* grigio chiaro rispetto al precedente */
+}
+
+[data-theme="light"] .bp-dark {
+    background-color: #e5e7eb; /* grigio chiaro */
+}
+
+[data-theme="light"] .bp-light {
+    background-color: #f3f4f6; /* ancora più chiaro */
+}
+
+
 @media (max-width: 880px) {
     .layout {
         grid-template-columns: 1fr;

@@ -17,7 +17,7 @@ for (let r = 0; r < 9; r++) {
             e.target.value = e.target.value.replace(/[^1-9]/g, "");
             updatePreview();
         });
-        
+
         cell.appendChild(input);
         gridElement.appendChild(cell);
     }
@@ -77,18 +77,38 @@ document
 
 function updatePreview() {
     const preview = document.getElementById("preview");
-    preview.innerHTML = "";
-    const b = readBoard();
+    preview.innerHTML = ""; // svuota prima
+
+    const board = readBoard();
+    const frag = document.createDocumentFragment();
 
     for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
-            const el = document.createElement("div");
+            const cell = document.createElement("div");
+            cell.className = "bp-cell";
 
-            el.className = "bp-cell";
-            el.textContent = b[r][c] === 0 ? "" : b[r][c];
-            preview.appendChild(el);
+            // Calcola indice del blocco 3x3 (0..8)
+            const blockRow = Math.floor(r / 3);
+            const blockCol = Math.floor(c / 3);
+            const blockIndex = blockRow * 3 + blockCol;
+
+            // Pattern a scacchiera sui blocchi:
+            // blocchi con indice pari => "scuro", dispari => "chiaro"
+            if (blockIndex % 2 === 0) {
+                cell.classList.add("bp-dark");
+            } else {
+                cell.classList.add("bp-light");
+            }
+
+            // contenuto della cella (vuoto se 0)
+            const val = board[r][c];
+            cell.textContent = val === 0 ? "" : String(val);
+
+            frag.appendChild(cell);
         }
     }
+
+    preview.appendChild(frag);
 }
 
 document.getElementById("btnSolve").addEventListener("click", async () => {
